@@ -34,7 +34,7 @@ Verifique se a imagem foi criada:
 sudo docker images
 ```
 
-Se a imagem estiver criada, vamos criaer o container para acessarmos o banco MySql:
+Se a imagem estiver criada, vamos criar o container para acessarmos o banco MySql:
 
 ```bash
 sudo docker run -d -p 3306:3306 -e MYSQL_ROOT_PASSWORD=urubu100 -e MYSQL_DATABASE=algas -e MYSQL_USER=grupo04 -e MYSQL_PASSWORD=urubu100 <name-image>
