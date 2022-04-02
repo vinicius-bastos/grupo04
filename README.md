@@ -45,7 +45,7 @@ sudo docker exec -it <container_id> bash
 ```
 
 ```bash
-mysql -uroot -p
+mysql -u root -p
 ```
 
 ### Extra
