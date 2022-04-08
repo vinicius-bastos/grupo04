@@ -1,5 +1,5 @@
 # Grupo 04 - 3CCO
-> Repositório para o projeto de Pesquisa e Inovação do GRUPO 04 do 3CCO da São Paulo Tech School
+> Repositório para o projeto de Pesquisa e Inovação de 3CCO - Grupo 4 da São Paulo Tech School
 
 ## Criando images Docker
 
