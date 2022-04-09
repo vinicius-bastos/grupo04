@@ -6,7 +6,7 @@
 Para nos facilitar na criação da imagem e container Docker (MySQL), foi disponibilizado um arquivo Dockerfile com o seguinte conteudo:
 
 ```dockerfile
-FROM mysql:5.7
+FROM mysql:latest
 COPY ./db/ /docker-entrypoint-initdb.d/
 ```
 
