@@ -6,9 +6,9 @@ import time
 import tracemalloc
 import config as sql
 
-cidade_atual = "SP"
+estado_atual = "SP"
 def transactions(cursor,init,final,step):
-    global cidade_atual
+    global estado_atual
     transaction = []
     lista = []
     lista_tempo = []
@@ -41,12 +41,12 @@ def transactions(cursor,init,final,step):
     print("tempo inicial de inserção:" + str(tempo_inical_insercao))
     print("tempo final de inserção:" + str(datetime.now()))
     print("Tempo de total inserção: {}".format(tempo_total_insercao))
-    sql.insert_info(cursor, cidade_atual, len(transaction),tempo_inical_insercao, tempo_total_insercao)
+    sql.insert_info(cursor, estado_atual, len(transaction),tempo_inical_insercao, tempo_total_insercao)
     
     
 def cenario(cursor):
-    global cidade_atual
-    valor = int(input("Escolha um cenário \n 1. [100_000,600_000,100_000] \n 2. [1_000,6_000,100] \n 3. [100,600,10] \n 4. [10,60,10] \n 5. [1_000_000,6_000_000,1_000_000] \n 6. Personalizado \n 7. Alterar cidade de inserção \n 8. Select \n 9. Sair \n"))
+    global estado_atual
+    valor = int(input("Escolha um cenário \n 1. [100_000,600_000,100_000] \n 2. [1_000,6_000,100] \n 3. [100,600,10] \n 4. [10,60,10] \n 5. [1_000_000,6_000_000,1_000_000] \n 6. Personalizado \n 7. Alterar Estado de inserção \n 8. Banco \n 9. Sair \n"))
     if valor == 1:
         return  transactions(cursor,100_000,600_000,100_000)
     if valor == 2:
@@ -63,7 +63,7 @@ def cenario(cursor):
         dado_passo = int(input("Digite o valor do passo: "))
         return transactions(cursor,dado_inicial,dado_final,dado_passo)
     if valor == 7:
-        cidade_atual = input("Digite o nome da cidade: ")
+        estado_atual = input("Digite a sigla do Estado : ")
         return
     if valor == 8:
         select(cursor)
@@ -73,12 +73,18 @@ def cenario(cursor):
     print("Opção inválida")
 
 def select(cursor):
-    valor = int(input("Escolha um cenário \n 1. Seleciona todos os valores da tabela dados \n 2. Seleciona todos os valores da tabela dados_info \n 3. Sair \n"))
+    valor = int(input("Escolha um cenário \n 1. Seleciona todos os valores da tabela dados \n 2. Seleciona todos os valores da tabela dados_info \n 3. Truncate tudo \n 4. Quantidade de dados \n 5. Sair \n"))
     if valor == 1:
         sql.select_dados(cursor)
     if valor == 2:
         sql.select_dados_info(cursor)
     if valor == 3:
+        sql.truncate_dados(cursor)
+        sql.truncate_infos(cursor)
+    if valor == 4:
+        sql.count_dados(cursor)
+        sql.count_infos(cursor)
+    if valor == 5:
         return
 
 def main():

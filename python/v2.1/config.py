@@ -6,7 +6,7 @@ from datetime import date, datetime
 
 def conn():
     try:
-        cnx = mysql.connector.connect(host='localhost',database='algas',user='grupo04',password='urubu100')
+        cnx = mysql.connector.connect(host='18.211.54.79',database='algas',user='grupo04',password='urubu100')
         print("Conectado ao servidor MySQL versão ")
         cursor = cnx.cursor()
         return cnx,cursor
@@ -28,11 +28,11 @@ def insert(cursor,transaction, tempo, memoria):
         VALUES (%d, %.20f,%d,'%s')
         """ % (transaction, tempo, memoria, datetime.now()))
 
-def insert_info(cursor,cidade_atual, leitos_ocupados, data_inicio_insercao, tempo_total_insercao):
+def insert_info(cursor,estado_atual, leitos_ocupados, data_inicio_insercao, tempo_total_insercao):
         cursor.execute("""
-        INSERT INTO infos (cidade, leitos_ocupados, data_inicio_insercao, tempo_execucao)
+        INSERT INTO infos (estado, leitos_ocupados, data_inicio_insercao, tempo_execucao)
         VALUES ('%s', %d,'%s','%s')
-        """ % (cidade_atual, leitos_ocupados, data_inicio_insercao, tempo_total_insercao))
+        """ % (estado_atual, leitos_ocupados, data_inicio_insercao, tempo_total_insercao))
 
 def select_dados(cursor):   
     cursor.execute("""
@@ -46,5 +46,29 @@ def select_dados_info(cursor):
     cursor.execute("""
     SELECT * FROM infos
     """)
-    for (idInfo, cidade, leitos_ocupados, data_inicio_insercao, tempo_execucao) in cursor:
-        print("idInfo: %d, Cidade: %s, Leitos ocupados: %d, Data inicio inserção: %s, Tempo total de execução: %s" % (idInfo, cidade, leitos_ocupados, data_inicio_insercao, tempo_execucao))
+    for (idInfo, estado, leitos_ocupados, data_inicio_insercao, tempo_execucao) in cursor:
+        print("idInfo: %d, Estado: %s, Leitos ocupados: %d, Data inicio inserção: %s, Tempo total de execução: %s" % (idInfo, estado, leitos_ocupados, data_inicio_insercao, tempo_execucao))
+
+def truncate_dados(cursor):
+    cursor.execute("""
+    TRUNCATE dados
+    """)
+
+def truncate_infos(cursor):
+    cursor.execute("""
+    TRUNCATE infos
+    """)
+
+def count_dados(cursor):
+    cursor.execute("""
+    SELECT COUNT(*) FROM dados
+    """)
+    for (count) in cursor:
+        print("Número de transações: %d" % (count))
+
+def count_infos(cursor):
+    cursor.execute("""
+    SELECT COUNT(*) FROM infos
+    """)
+    for (count) in cursor:
+        print("Número de informações: %d" % (count))
