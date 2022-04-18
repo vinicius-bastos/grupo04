@@ -5,8 +5,8 @@ import re
 import time
 import tracemalloc
 import config as sql
-
-estado_atual = "SP"
+todos_estado = ["AC","AL","AP","AM","BA","CE","DF","ES","GO","MA","MT","MS","MG","PA","PB","PR","PE","PI","RJ","RN","RS","RO","RR","SC","SE","SP","TO"]
+estado_atual = todos_estado[25]
 def transactions(cursor,init,final,step):
     global estado_atual
     transaction = []
@@ -46,6 +46,7 @@ def transactions(cursor,init,final,step):
     
 def cenario(cursor):
     global estado_atual
+    global todos_estado
     valor = int(input("Escolha um cenário \n 1. [100_000,600_000,100_000] \n 2. [1_000,6_000,100] \n 3. [100,600,10] \n 4. [10,60,10] \n 5. [1_000_000,6_000_000,1_000_000] \n 6. Personalizado \n 7. Alterar Estado de inserção \n 8. Banco \n 9. Sair \n"))
     if valor == 1:
         return  transactions(cursor,100_000,600_000,100_000)
@@ -63,7 +64,9 @@ def cenario(cursor):
         dado_passo = int(input("Digite o valor do passo: "))
         return transactions(cursor,dado_inicial,dado_final,dado_passo)
     if valor == 7:
-        estado_atual = input("Digite a sigla do Estado : ")
+        print("Estados: 0. AC \n 1. AL \n 2. AP \n 3. AM \n 4. BA \n 5. CE \n 6. DF \n 7. ES \n 8. GO \n 9. MA \n 10. MT \n 11. MS \n 12. MG \n 13. PA \n 14. PB \n 15. PR \n 16. PE \n 17. PI \n 18. RJ \n 19. RN \n 20. RS \n 21. RO \n 22. RR \n 23. SC \n 24. SE \n 25. SP \n 26. TO \n")
+        posicao_estado = int(input("Digite o número do Estado : "))
+        estado_atual = todos_estado[posicao_estado]
         return
     if valor == 8:
         select(cursor)
