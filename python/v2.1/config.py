@@ -28,11 +28,11 @@ def insert(cursor,transaction, tempo, memoria):
         VALUES (%d, %.20f,%d,'%s')
         """ % (transaction, tempo, memoria, datetime.now()))
 
-def insert_info(cursor,estado_atual, leitos_ocupados, data_inicio_insercao, tempo_total_insercao):
+def insert_info(cursor,estado_atual, leitos_ocupados, data_inicio_insercao, tempo_total_insercao,maior_memoria):
         cursor.execute("""
-        INSERT INTO infos (estado, leitos_ocupados, data_inicio_insercao, tempo_execucao)
-        VALUES ('%s', %d,'%s','%s')
-        """ % (estado_atual, leitos_ocupados, data_inicio_insercao, tempo_total_insercao))
+        INSERT INTO infos (estado, leitos_ocupados, data_inicio_insercao, tempo_execucao, maior_memoria)
+        VALUES ('%s', %d,'%s','%s', %d)
+        """ % (estado_atual, leitos_ocupados, data_inicio_insercao, tempo_total_insercao,maior_memoria))
 
 def select_dados(cursor):   
     cursor.execute("""
@@ -46,8 +46,8 @@ def select_dados_info(cursor):
     cursor.execute("""
     SELECT * FROM infos
     """)
-    for (idInfo, estado, leitos_ocupados, data_inicio_insercao, tempo_execucao) in cursor:
-        print("idInfo: %d, Estado: %s, Leitos ocupados: %d, Data inicio inserção: %s, Tempo total de execução: %s" % (idInfo, estado, leitos_ocupados, data_inicio_insercao, tempo_execucao))
+    for (idInfo, estado, leitos_ocupados, data_inicio_insercao, tempo_execucao, maior_memoria) in cursor:
+        print("idInfo: %d, Estado: %s, Leitos ocupados: %d, Data inicio inserção: %s, Tempo total de execução: %s , Pico de memória: %d" % (idInfo, estado, leitos_ocupados, data_inicio_insercao, tempo_execucao, maior_memoria))
 
 def truncate_dados(cursor):
     cursor.execute("""

@@ -24,6 +24,8 @@ def transactions(cursor,init,final,step):
         lista_memoria.append(tracemalloc.get_traced_memory()[0])
         tempo_final = (time.time()) - tempo_inicial
         lista_tempo.append(tempo_final)
+    maior_memoria = max(lista_memoria)
+
     tracemalloc.stop()
     orderedTranscation = [num for num in reversed(transaction)]
     # Inserção no Banco
@@ -41,7 +43,7 @@ def transactions(cursor,init,final,step):
     print("tempo inicial de inserção:" + str(tempo_inical_insercao))
     print("tempo final de inserção:" + str(datetime.now()))
     print("Tempo de total inserção: {}".format(tempo_total_insercao))
-    sql.insert_info(cursor, estado_atual, len(transaction),tempo_inical_insercao, tempo_total_insercao)
+    sql.insert_info(cursor, estado_atual, len(transaction),tempo_inical_insercao, tempo_total_insercao, maior_memoria)
     
     
 def cenario(cursor):
