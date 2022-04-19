@@ -47,7 +47,7 @@ def select_dados_info(cursor):
     SELECT * FROM infos
     """)
     for (idInfo, estado, leitos_ocupados, data_inicio_insercao, tempo_execucao, maior_memoria) in cursor:
-        print("idInfo: %d, Estado: %s, Leitos ocupados: %d, Data inicio inserção: %s, Tempo total de execução: %s , Pico de memória: %d" % (idInfo, estado, leitos_ocupados, data_inicio_insercao, tempo_execucao, maior_memoria))
+        print("idInfo: %d, Estado: %s, Leitos ocupados: %d, Data inicio inserção: %s, Tempo total de execução: %s , Pico de memória: %d KiloByte" % (idInfo, estado, leitos_ocupados, data_inicio_insercao, tempo_execucao, maior_memoria))
 
 def truncate_dados(cursor):
     cursor.execute("""
