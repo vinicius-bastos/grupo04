@@ -35,12 +35,14 @@ def transactions(cursor,init,final,step):
         tempo = lista_tempo.pop()
         memoria = lista_memoria.pop()
         etn = etnia()
-        print("Inserido o valor no banco de dados: transaction = {}, tempo = {}, memoria = {}, etnia = {}".format(transac,tempo,memoria,etn))
+        idad = idade()
+        print("Inserido o valor no banco de dados: transaction = {}, tempo = {}, memoria = {}, etnia = {}, idade = {}".format(transac,tempo,memoria,etn,idad))
         sql.insert(cursor, 
                    transac,
                    tempo,
                    memoria,
-                   etn)
+                   etn,
+                   idad)
     tempo_total_insercao =  (datetime.now()) - tempo_inical_insercao
     print("tempo inicial de inserção:" + str(tempo_inical_insercao))
     print("tempo final de inserção:" + str(datetime.now()))

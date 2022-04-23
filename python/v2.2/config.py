@@ -22,11 +22,11 @@ def desconect(cnx,cursor):
     cursor.close()
     cnx.close()
 
-def insert(cursor,transaction, tempo, memoria,etn):
+def insert(cursor,transaction, tempo, memoria,etn,idad):
         cursor.execute("""
-        INSERT INTO dados (entrada,tempo,memoria,etnia, data_insercao)
-        VALUES (%d, %.20f,%d,'%s','%s')
-        """ % (transaction, tempo, memoria,etn, datetime.now()))
+        INSERT INTO dados (entrada,tempo,memoria,etnia,idade, data_insercao)
+        VALUES (%d, %.20f,%d,'%s','%s','%s')
+        """ % (transaction, tempo, memoria,etn,idad, datetime.now()))
 
 def insert_info(cursor,estado_atual, leitos_ocupados, data_inicio_insercao, tempo_total_insercao,maior_memoria):
         cursor.execute("""
