@@ -6,7 +6,7 @@ from datetime import date, datetime
 
 def conn():
     try:
-        cnx = mysql.connector.connect(host='localhost',database='algas',user='grupo04',password='urubu100')
+        cnx = mysql.connector.connect(host='18.211.54.79',database='algas',user='grupo04',password='urubu100')
         print("Conectado ao servidor MySQL versão ")
         cursor = cnx.cursor()
         return cnx,cursor
@@ -22,11 +22,11 @@ def desconect(cnx,cursor):
     cursor.close()
     cnx.close()
 
-def insert(cursor,transaction, tempo, memoria):
+def insert(cursor,transaction, tempo, memoria,etn):
         cursor.execute("""
-        INSERT INTO dados (entrada,tempo,memoria, data_insercao)
-        VALUES (%d, %.20f,%d,'%s')
-        """ % (transaction, tempo, memoria, datetime.now()))
+        INSERT INTO dados (entrada,tempo,memoria,etnia, data_insercao)
+        VALUES (%d, %.20f,%d,'%s','%s')
+        """ % (transaction, tempo, memoria,etn, datetime.now()))
 
 def insert_info(cursor,estado_atual, leitos_ocupados, data_inicio_insercao, tempo_total_insercao,maior_memoria):
         cursor.execute("""
